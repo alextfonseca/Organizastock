@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+    <img alt="Logo Organizastock" src="./public/icons/logo.svg" width="150" height="100" />
+</h1>
 
-## Getting Started
+<p align="center">
+    <img src="./public/organizastock.png" height="500"/> <br>
+     <img alt="Made by Alex Teixeira" src="https://img.shields.io/badge/made%20by- Alex Teixeira-%15C3D6?style=flat-square&color=0d5c46&labelColor=000">
+</p>
 
-First, run the development server:
+**Organizastock** é um sistema de gerenciamento de estoque, onde é possível adicionar produtos a seu estoque, verificar todas as informações e remove-los se for necessário;
+
+# Propósito do Projeto
+
+Organizastock é um projeto para aplicar conhecimentos em front-end, back-end e banco de dados
+
+## 🚀 Instalando o projeto na sua maquina
+
+Para instalar o projeto, siga estas etapas:
+
+Linux e macOS:
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ git clone https://github.com/alextfonseca/BuscaCep.git
+$ cd organizastock
+$ yarn ou npm
+$ expo start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Windows:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+$ git clone https://github.com/alextfonseca/BuscaCep.git
+$ cd organizastock
+$ yarn ou npm
+$ expo start
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# Tecnologias
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Tecnologias utilizadas no desenvolvimento do projeto:
 
-## Learn More
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Chakra UI](https://chakra-ui.com/)
+- [Axios](https://github.com/axios/axios)
+- [Node.js](https://nodejs.org/en/)
+- [Sequelize](https://sequelize.org/)
+- [MySql](https://www.mysql.com/)
 
-To learn more about Next.js, take a look at the following resources:
+# 🧑‍💻 Criador
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/alextfonseca">
+        <img src="https://github.com/alextfonseca.png" width="100px;" alt="Foto de Alex Teixeira da Fonseca no GitHub"/><br>
+        <sub>
+          <b>Alex Teixeira da Fonseca</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>

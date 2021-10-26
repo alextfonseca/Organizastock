@@ -23,7 +23,6 @@ Linux e macOS:
 $ git clone https://github.com/alextfonseca/Organizastock.git
 $ cd organizastock
 $ yarn ou npm
-$ expo start
 ```
 
 Windows:
@@ -32,7 +31,6 @@ Windows:
 $ git clone https://github.com/alextfonseca/Organizastock.git
 $ cd organizastock
 $ yarn ou npm
-$ expo start
 ```
 
 # Tecnologias

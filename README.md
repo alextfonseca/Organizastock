@@ -20,7 +20,7 @@ Para instalar o projeto, siga estas etapas:
 Linux e macOS:
 
 ```bash
-$ git clone https://github.com/alextfonseca/BuscaCep.git
+$ git clone https://github.com/alextfonseca/Organizastock.git
 $ cd organizastock
 $ yarn ou npm
 $ expo start
@@ -29,7 +29,7 @@ $ expo start
 Windows:
 
 ```bash
-$ git clone https://github.com/alextfonseca/BuscaCep.git
+$ git clone https://github.com/alextfonseca/Organizastock.git
 $ cd organizastock
 $ yarn ou npm
 $ expo start

@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import { toast } from "react-toastify";
 
 import { useState } from "react";
-import { api } from "../service/api";
+import { api } from "../services/api";
 
 import { FormProducts } from "../components/FormProducts";
 // notificações

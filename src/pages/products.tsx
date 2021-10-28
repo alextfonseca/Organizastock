@@ -1,7 +1,4 @@
 import NextLink from "next/link";
-import { toast } from "react-toastify";
-
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 
 import {
   Box,
@@ -13,119 +10,147 @@ import {
   Td,
   Th,
   Thead,
+  Spinner,
   Tr,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { api } from "../services/api";
+import { ProductList } from "../components/ProductList";
 
-function handleDeleteIcon() {
-  toast.success("Produto removido com sucesso!");
+interface productsProps {
+  id: number;
+  productName: string;
+  cnpjManufacturer: string;
+  amount: number;
+  unitaryValue: number;
+  lotValue: number;
+  expirationDate: string;
+  createdAt: string;
 }
+
+interface dataProps {
+  data: [];
+}
+
 const products = () => {
-  return (
-    <Box as="main" h="100vh">
-      <title>Organizastock | Produtos</title>
-      <Box flex="1" h="100vh" p="8">
-        <Flex mb="8" justify="space-between" align="center">
-          <Heading size="lg" fontWeight="normal">
-            Produtos cadastrados
-          </Heading>
+  const [products, setProducts] = useState<any>([]);
 
-          <NextLink href="/newProduct" passHref>
-            <Button as="a" size="lg" colorScheme="blue">
-              Criar novo produto
-            </Button>
-          </NextLink>
-        </Flex>
+  useEffect(() => {
+    async function getProducts() {
+      const { data }: dataProps = await api.get("products");
 
-        <>
-          <Table colorScheme="whiteAlpha">
-            <Thead>
-              <Tr>
-                <Th>Nome do produto</Th>
-                <Th>Quantidade</Th>
-                <Th>Valor do lote</Th>
-                <Th>CNPJ do fabricante</Th>
-                <Th>Valor unitário</Th>
-                <Th>Data de validade do lote</Th>
-                <Th></Th>
-                <Th></Th>
-              </Tr>
-            </Thead>
+      const dataProduct = data.map((item: productsProps) => {
+        return {
+          id: item.id,
+          productName: item.productName,
+          cnpjManufacturer: item.cnpjManufacturer,
+          amount: item.amount,
+          unitaryValue: item.unitaryValue.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          }),
+          lotValue: item.lotValue.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          }),
+          expirationDate: new Date(item.expirationDate).toLocaleDateString(
+            "pt-BR",
+            {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            },
+          ),
+          createdAt: new Date(item.createdAt).toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }),
+        };
+      });
 
-            <Tbody>
-              <Tr textAlign="center">
-                <Td>Molho de tomate</Td>
-                <Td>400</Td>
-                <Td>40.999</Td>
-                <Td>1111111111111</Td>
-                <Td>10.99</Td>
-                <Td>26/10/2021</Td>
-                <Td>
-                  <Button as="button" colorScheme="yellow">
-                    <EditIcon />
-                  </Button>
-                </Td>
-                <Td>
-                  <Button
-                    as="button"
-                    colorScheme="red"
-                    onClick={handleDeleteIcon}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </Td>
-              </Tr>
+      setProducts(dataProduct);
+    }
 
-              <Tr textAlign="center">
-                <Td>Molho de tomate</Td>
-                <Td>400</Td>
-                <Td>40.999</Td>
-                <Td>1111111111111</Td>
-                <Td>10.99</Td>
-                <Td>26/10/2021</Td>
-                <Td>
-                  <Button as="button" colorScheme="yellow">
-                    <EditIcon />
-                  </Button>
-                </Td>
-                <Td>
-                  <Button
-                    as="button"
-                    colorScheme="red"
-                    onClick={handleDeleteIcon}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </Td>
-              </Tr>
+    getProducts();
+  }, []);
 
-              <Tr textAlign="center">
-                <Td>Molho de tomate</Td>
-                <Td>400</Td>
-                <Td>40.999</Td>
-                <Td>1111111111111</Td>
-                <Td>10.99</Td>
-                <Td>26/10/2021</Td>
-                <Td>
-                  <Button as="button" colorScheme="yellow">
-                    <EditIcon />
-                  </Button>
-                </Td>
-                <Td>
-                  <Button
-                    as="button"
-                    colorScheme="red"
-                    onClick={handleDeleteIcon}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </>
+  if (products == "" || products == undefined) {
+    return (
+      <Box as="main" h="100vh">
+        <title>Organizastock | Produtos</title>
+        <Box flex="1" h="100vh" p="8">
+          <Flex mb="8" justify="space-between" align="center">
+            <Heading size="lg" fontWeight="normal">
+              Produtos cadastrados
+            </Heading>
+
+            <NextLink href="/newProduct" passHref>
+              <Button as="a" size="lg" colorScheme="blue">
+                Criar novo produto
+              </Button>
+            </NextLink>
+          </Flex>
+
+          <Flex width="100%" height="80%" align="center" justify="center">
+            <Spinner />
+          </Flex>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  } else {
+    return (
+      <Box as="main" h="100vh">
+        <title>Organizastock | Produtos</title>
+        <Box flex="1" h="100vh" p="8">
+          <Flex mb="8" justify="space-between" align="center">
+            <Heading size="lg" fontWeight="normal">
+              Produtos cadastrados
+            </Heading>
+
+            <NextLink href="/newProduct" passHref>
+              <Button as="a" size="lg" colorScheme="blue">
+                Criar novo produto
+              </Button>
+            </NextLink>
+          </Flex>
+
+          <>
+            <Table colorScheme="whiteAlpha">
+              <Thead>
+                <Tr>
+                  <Th>Nome do produto</Th>
+                  <Th>Quantidade</Th>
+                  <Th>Valor do lote</Th>
+                  <Th>CNPJ do fabricante</Th>
+                  <Th>Valor unitário</Th>
+                  <Th>Data de validade do lote</Th>
+                  <Th></Th>
+                  <Th></Th>
+                </Tr>
+              </Thead>
+
+              <Tbody>
+                {products.map((item: productsProps) => {
+                  return (
+                    <ProductList
+                      key={item.id}
+                      amount={item.amount}
+                      cnpjManufacturer={item.cnpjManufacturer}
+                      expirationDate={item.expirationDate}
+                      lotValue={item.lotValue}
+                      productName={item.productName}
+                      unitaryValue={item.unitaryValue}
+                    />
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </>
+        </Box>
+      </Box>
+    );
+  }
 };
 
 export default products;

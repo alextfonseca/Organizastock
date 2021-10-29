@@ -1,12 +1,4 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Heading,
-  Grid,
-  Button,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Grid, Button, HStack } from "@chakra-ui/react";
 
 import NextLink from "next/link";
 
@@ -21,57 +13,43 @@ function alertRegisterNotification() {
   toast.success("Produto cadastrado com sucesso!");
 }
 
-function alertCancelNotification() {
-  toast.error("Cancelado com sucesso!");
-}
-
 function alertServerError() {
   toast.error("Erro interno no servidor!");
 }
 
 const newProducts = () => {
   const [productName, setProductName] = useState("");
-  let [cnpjManufacturer, setCnpjManufacturer] = useState("");
+  const [cnpjManufacturer, setCnpjManufacturer] = useState("");
   const [amount, setAmount] = useState(0);
   const [unitaryValue, setUnitaryValue] = useState("");
   const [lotValue, setLotValue] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
 
   async function handleSubmitProduct(event: any) {
-    const regexpCNPJ = /\d{2}[-.]?(?:\d{3}[-.]?){2}[-\/]?\d{4}[-.]?\d{2}/g;
-    const cnpjs = [
-      "00.000.000/0000-00",
-      "00000000000000",
-      "00-000-000-0000-00",
-      "00.000.000/000000",
-      "00.000.000.000000",
-      "00.000.000.0000.00",
-    ];
-
     if (
       cnpjManufacturer.replace("-", "").replace(".", "").replace("/", "")
         .length < 14
     ) {
       toast.error("O CNPJ digitado é inválido!");
+    } else {
+      const product = {
+        NomeProduto: productName,
+        CNPJFabricante: cnpjManufacturer,
+        Quantidade: amount,
+        ValorUnitario: unitaryValue,
+        ValorLote: lotValue,
+        DataValidade: expirationDate,
+      };
+
+      try {
+        const response = await api.post("/products/add", product);
+        alertRegisterNotification();
+      } catch (error) {
+        alertServerError();
+      }
+
+      event.preventDefault();
     }
-    const product = {
-      NomeProduto: productName,
-      CNPJFabricante: cnpjManufacturer,
-      Quantidade: Number(amount),
-      ValorUnitario: Number(unitaryValue),
-      ValorLote: Number(lotValue),
-      DataValidade: expirationDate,
-    };
-
-    // try {
-    //   const response = await api.post("/add", product);
-    //   alertRegisterNotification();
-    // } catch (error) {
-    //   alertServerError();
-    //   event.preventDefault();
-    // }
-
-    event.preventDefault();
   }
 
   return (
@@ -89,13 +67,7 @@ const newProducts = () => {
         </NextLink>
       </Flex>
 
-      <Grid
-        mt="8"
-        templateColumns="repeat(2, 1fr)"
-        gap={8}
-        as="form"
-        onSubmit={handleSubmitProduct}
-      >
+      <Grid mt="8" templateColumns="repeat(2, 1fr)" gap={8} as="form">
         <FormProducts
           label="Digite o nome do produto"
           placeholder="Molho de tomate"
@@ -145,6 +117,7 @@ const newProducts = () => {
           label="Data de validade do lote"
           type="date"
           id="expirationDate"
+          isRequired
           onChange={(e) => setExpirationDate(e.target.value)}
         />
 
@@ -155,7 +128,7 @@ const newProducts = () => {
             colorScheme="blue"
             p="8"
             as="button"
-            type="submit"
+            onClick={handleSubmitProduct}
           >
             Cadastrar
           </Button>

@@ -26,10 +26,10 @@ export const FormProducts = ({
           type={type}
           name={id}
           placeholder={placeholder}
-          bg="whiteAlpha.500"
+          bg="whiteAlpha.300"
           fontSize="20"
           p="6"
-          _placeholder={{ color: "gray.300" }}
+          _placeholder={{ color: "whiteAlpha.400" }}
           {...rest}
         />
       </FormControl>
@@ -44,10 +44,10 @@ export const FormProducts = ({
           type={type}
           name={id}
           placeholder={placeholder}
-          bg="whiteAlpha.500"
+          bg="whiteAlpha.300"
           fontSize="20"
           p="6"
-          _placeholder={{ color: "gray.300" }}
+          _placeholder={{ color: "gray.100" }}
           {...rest}
         />
       </FormControl>

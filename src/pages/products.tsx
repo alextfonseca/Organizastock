@@ -2,6 +2,7 @@ import NextLink from "next/link";
 
 import {
   Box,
+  Text,
   Button,
   Flex,
   Heading,
@@ -16,6 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import { ProductList } from "../components/ProductList";
+import { GetServerSideProps } from "next";
 
 interface productsProps {
   id: number;
@@ -33,7 +35,7 @@ interface dataProps {
 }
 
 const products = () => {
-  const [products, setProducts] = useState<any>([]);
+  const [products, setProducts] = useState<any>();
 
   useEffect(() => {
     async function getProducts() {
@@ -75,25 +77,50 @@ const products = () => {
     getProducts();
   }, []);
 
-  if (products == "" || products == undefined) {
+  if (products == undefined) {
     return (
       <Box as="main" h="100vh">
         <title>Organizastock | Produtos</title>
         <Box flex="1" h="100vh" p="8">
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
-              Produtos cadastrados
+              Produtos cadastrados em seu estoque
             </Heading>
 
             <NextLink href="/newProduct" passHref>
               <Button as="a" size="lg" colorScheme="blue">
-                Criar novo produto
+                Adicionar novos produtos
               </Button>
             </NextLink>
           </Flex>
 
           <Flex width="100%" height="80%" align="center" justify="center">
             <Spinner />
+          </Flex>
+        </Box>
+      </Box>
+    );
+  } else if (products == "") {
+    return (
+      <Box as="main" h="100vh">
+        <title>Organizastock | Produtos</title>
+        <Box flex="1" h="100vh" p="8">
+          <Flex mb="8" justify="space-between" align="center">
+            <Heading size="lg" fontWeight="normal">
+              Produtos cadastrados em seu estoque
+            </Heading>
+
+            <NextLink href="/newProduct" passHref>
+              <Button as="a" size="lg" colorScheme="blue">
+                Adicionar novos produtos
+              </Button>
+            </NextLink>
+          </Flex>
+
+          <Flex width="100%" height="80%" align="center" justify="center">
+            <Text as="h1" fontSize="20">
+              Parece que não há produtos no seu estoque 🧐
+            </Text>
           </Flex>
         </Box>
       </Box>
@@ -105,12 +132,12 @@ const products = () => {
         <Box flex="1" h="100vh" p="8">
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
-              Produtos cadastrados
+              Produtos cadastrados em seu estoque
             </Heading>
 
             <NextLink href="/newProduct" passHref>
               <Button as="a" size="lg" colorScheme="blue">
-                Criar novo produto
+                Adicionar novos produtos
               </Button>
             </NextLink>
           </Flex>
@@ -135,6 +162,7 @@ const products = () => {
                   return (
                     <ProductList
                       key={item.id}
+                      id={item.id}
                       amount={item.amount}
                       cnpjManufacturer={item.cnpjManufacturer}
                       expirationDate={item.expirationDate}

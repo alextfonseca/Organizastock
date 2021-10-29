@@ -23,9 +23,9 @@ interface productsProps {
   id: number;
   productName: string;
   cnpjManufacturer: string;
-  amount: number;
-  unitaryValue: number;
-  lotValue: number;
+  amount: string;
+  unitaryValue: string;
+  lotValue: string;
   expirationDate: string;
   createdAt: string;
 }
@@ -47,11 +47,11 @@ const products = () => {
           productName: item.productName,
           cnpjManufacturer: item.cnpjManufacturer,
           amount: item.amount,
-          unitaryValue: item.unitaryValue.toLocaleString("pt-br", {
+          unitaryValue: Number(item.unitaryValue).toLocaleString("pt-br", {
             style: "currency",
             currency: "BRL",
           }),
-          lotValue: item.lotValue.toLocaleString("pt-br", {
+          lotValue: Number(item.lotValue).toLocaleString("pt-br", {
             style: "currency",
             currency: "BRL",
           }),

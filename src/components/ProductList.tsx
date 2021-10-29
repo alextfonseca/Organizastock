@@ -8,9 +8,9 @@ interface ProductListProps {
   id: number;
   productName: string;
   cnpjManufacturer: string;
-  amount: number;
-  unitaryValue: number;
-  lotValue: number;
+  amount: string;
+  unitaryValue: string;
+  lotValue: string;
   expirationDate: string;
 }
 

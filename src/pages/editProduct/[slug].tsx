@@ -12,9 +12,9 @@ interface ProductListProps {
     id: number;
     productName: string;
     cnpjManufacturer: string;
-    amount: number;
-    unitaryValue: number;
-    lotValue: number;
+    amount: string;
+    unitaryValue: string;
+    lotValue: string;
     expirationDate: string;
   };
 }
@@ -99,7 +99,7 @@ const editProduct = ({ product }: ProductListProps) => {
           id="amount"
           isRequired
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          onChange={(e) => setAmount(e.target.value)}
         />
 
         <FormProducts
@@ -108,7 +108,7 @@ const editProduct = ({ product }: ProductListProps) => {
           id="unitaryValue"
           isRequired
           value={unitaryValue}
-          onChange={(e) => setUnitaryValue(Number(e.target.value))}
+          onChange={(e) => setUnitaryValue(e.target.value)}
         />
 
         <FormProducts
@@ -117,7 +117,7 @@ const editProduct = ({ product }: ProductListProps) => {
           id="lotValue"
           isRequired
           value={lotValue}
-          onChange={(e) => setLotValue(Number(e.target.value))}
+          onChange={(e) => setLotValue(e.target.value)}
         />
 
         <FormProducts
@@ -164,9 +164,9 @@ interface ProductListProps {
     id: number;
     productName: string;
     cnpjManufacturer: string;
-    amount: number;
-    unitaryValue: number;
-    lotValue: number;
+    amount: string;
+    unitaryValue: string;
+    lotValue: string;
     expirationDate: string;
   };
 }
